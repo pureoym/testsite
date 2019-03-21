@@ -1,4 +1,4 @@
-##日志
+##日志  
 ###创建项目以及应用
 ```commandline
 python -m django --verion
