@@ -1,17 +1,17 @@
-##日志  
-###创建项目以及应用
+## 日志  
+### 创建项目以及应用
 ```commandline
 python -m django --verion
 django-admin startproject cs_api
 cd cs_api
 python manage.py startapp api
 ```
-###启动系统
+### 启动系统
 ```commandline
 python manage.py runserver 8087
 ```
 
-###配置URL
+### 配置URL
 
 修改cs_api/api/views.py   
 ```python
