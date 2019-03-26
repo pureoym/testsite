@@ -15,3 +15,6 @@ def test(request):
     d1 = {'sid': 1, 'title': 'my test title'}
     result = json.dumps(d1)
     return HttpResponse(result)
+
+
+def
