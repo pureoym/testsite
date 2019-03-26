@@ -18,6 +18,6 @@ from django.conf.urls import url
 from django.urls import path,include
 
 urlpatterns = [
-    url(r'^api',include('api.urls')),
+    url(r'^api/',include('api.urls')),
     path('admin/', admin.site.urls),
 ]
