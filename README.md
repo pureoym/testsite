@@ -53,7 +53,27 @@ urlpatterns = [
 测试接口  
 http://localhost:8087/api/test
 
-###创建模型
+### 连接数据库
+在/testsite/setting.py中，做如下修改
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',
+        'USER': 'ai',
+        'PASSWORD': 'ai_123',
+        'HOST': '10.10.192.61',
+        'PORT': '3306',
+    }
+}
+```
+在项目文件夹下的__init__.py中，做如下修改
+```python
+import pymysql
+pymysql.install_as_MySQLdb()
+```
+
+### 创建模型
 在cs_api/api/models.py中，增加  
 ```python
 from django.db import models
@@ -78,7 +98,7 @@ class Person(models.Model):
 ```
 创建后执行命令  
 ```commandline
-python manage.py makemigrations api
-python manage.py sqlmigrate api 0001
+python manage.py makemigrations app
+python manage.py sqlmigrate app 0001
 python manage.py migrate
 ```
