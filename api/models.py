@@ -6,8 +6,8 @@ class Story(models.Model):
     sid = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=256, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
-    pid = models.ForeignKey(to="Person", to_field="pid", on_delete=None)
-    pub_time = models.DateTimeField(null=True, blank=True)
+    # pid = models.ForeignKey(to="Person", to_field="pid", on_delete=None)
+    # pub_time = models.DateTimeField(null=True, blans11k=True)
 
     def __str__(self):
         return self.title
