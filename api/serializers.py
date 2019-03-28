@@ -21,30 +21,33 @@
 from .models import Story, Person
 from rest_framework import serializers
 
+test='https://www.youtube.com/results?search_query=aircraft+carrier&sp=EgIIAQ%253D%253D'
 
-class StorySerializer(serializers.Serializer):
-    sid = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(required=False, allow_blank=True, max_length=100)
 
-    def create(self, validated_data):
-        """
-        Create and return a new `Story` instance, given the validated data.
-        :param validated_data:
-        :return:
-        """
-        return Story.objects.create(**validated_data)
+# class StorySerializer(serializers.Serializer):
+#     sid = serializers.IntegerField(read_only=True)
+#     title = serializers.CharField(required=False, allow_blank=True, max_length=100)
+#
+#     def create(self, validated_data):
+#         """
+#         Create and return a new `Story` instance, given the validated data.
+#         :param validated_data:
+#         :return:
+#         """
+#         return Story.objects.create(**validated_data)
+#
+#     def update(self, instance, validated_data):
+#         """
+#         Update and return an existing `Story` instance, given the validated data.
+#         :param instance:
+#         :param validated_data:
+#         :return:
+#         """
+#         instance.title = validated_data.get('title', instance.title)
+#         instance.save()
+#         return instance
 
-    def update(self, instance, validated_data):
-        """
-        Update and return an existing `Story` instance, given the validated data.
-        :param instance:
-        :param validated_data:
-        :return:
-        """
-        instance.title = validated_data.get('title', instance.title)
-        instance.save()
-        return instance
-
+class StorySerializer(serializers.ModelSerializer):
     class Meta:
-        module = Story
-        fields = {'sid', 'title', 'pid'}
+        model = Story
+        fields = ('sid','title','content')
