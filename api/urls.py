@@ -19,9 +19,19 @@
 # limitations under the License.
 # ========================================================================
 from django.urls import path
-from . import views
+from api import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
+# function based view
+# urlpatterns = [
+#     path('story/',views.story_list),
+#     path('story/<int:pk>/',views.story_detail),
+# ]
+
+# class-view
 urlpatterns = [
-    path('story/',views.story_list),
-    path('story/<int:pk>/',views.story_detail),
+    path('story/', views.StoryList.as_view()),
+    path('story/<int:pk>/', views.StoryDetail.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
