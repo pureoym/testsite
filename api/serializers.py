@@ -23,6 +23,7 @@ from rest_framework import serializers
 
 test = 'https://www.youtube.com/results?search_query=aircraft+carrier&sp=EgIIAQ%253D%253D'
 
+
 # class StorySerializer(serializers.Serializer):
 #     sid = serializers.IntegerField(read_only=True)
 #     title = serializers.CharField(required=False, allow_blank=True, max_length=100)
@@ -52,7 +53,7 @@ class PersonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('id', 'name')
+        fields = ('pid', 'pname')
 
 
 # class PersonRelateField(serializers.RelatedField):
@@ -61,13 +62,18 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 class StorySerializer(serializers.ModelSerializer):
-    # person = serializers.HyperlinkedIdentityField(many=True, view_name='person', read_only=True)
-    # person_id = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    # person_id = serializers.StringRelatedField(many=True)
 
+    # 相关列表中显示model.Person.__str__
+    # person = serializers.StringRelatedField(many=True)
+
+    # 相关列表中显示主键
+    person = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # person = serializers.PrimaryKeyRelatedField(many=True, queryset=Story.objects.all()) # 另一种写法
+
+    # 相关列表中显示全部内容 未成功
+    # person = PersonSerializer()
 
     class Meta:
         model = Story
-        fields = ('sid', 'title', 'content', 'person_id')
-        fields = ('sid', 'title', 'content')
-
+        fields = ('sid', 'title', 'content', 'person')
+        # fields = ('sid', 'title', 'content')

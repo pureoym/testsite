@@ -51,7 +51,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-@api_view(['GET', 'POST'])
+# @api_view(['GET', 'POST'])
+@api_view(['GET'])
 def story_list(request):
     """
     List all code stories, or create a new story.
@@ -63,15 +64,16 @@ def story_list(request):
         serializer = StorySerializer(stories, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = StorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+    # elif request.method == 'POST':
+    #     serializer = StorySerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+# @api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET'])
 def story_detail(request, pk):
     """
     Retrieve, update or delete a story.
@@ -85,13 +87,13 @@ def story_detail(request, pk):
         serializer = StorySerializer(story)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
-        serializer = StorySerializer(story, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        story.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # elif request.method == 'PUT':
+    #     serializer = StorySerializer(story, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #
+    # elif request.method == 'DELETE':
+    #     story.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
