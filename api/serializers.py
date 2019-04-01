@@ -23,7 +23,6 @@ from rest_framework import serializers
 
 test = 'https://www.youtube.com/results?search_query=aircraft+carrier&sp=EgIIAQ%253D%253D'
 
-
 # class StorySerializer(serializers.Serializer):
 #     sid = serializers.IntegerField(read_only=True)
 #     title = serializers.CharField(required=False, allow_blank=True, max_length=100)
@@ -56,20 +55,19 @@ class PersonSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 
-class PersonRelateField(serializers.RelatedField):
-    def to_representation(self, value):
-        return (value.pid, value.pname)
+# class PersonRelateField(serializers.RelatedField):
+#     def to_representation(self, value):
+#         return (value.pid, value.pname)
 
 
 class StorySerializer(serializers.ModelSerializer):
     # person = serializers.HyperlinkedIdentityField(many=True, view_name='person', read_only=True)
-    person = PersonRelateField(read_only=True)
+    # person_id = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # person_id = serializers.StringRelatedField(many=True)
 
-    # person = serializers.ReadOnlyField(source='person.pid')
 
     class Meta:
         model = Story
-        fields = ('sid', 'title', 'content', 'person')
-        # person = serializers.ReadOnlyField(source='person.id')
+        fields = ('sid', 'title', 'content', 'person_id')
+        fields = ('sid', 'title', 'content')
 
-# from django.contrib.auth.models import User

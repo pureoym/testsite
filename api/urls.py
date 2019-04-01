@@ -20,20 +20,24 @@
 # ========================================================================
 from django.urls import path
 from api import views
-from rest_framework.urlpatterns import format_suffix_patterns
 
-# function based view
-# urlpatterns = [
-#     path('story/',views.story_list),
-#     path('story/<int:pk>/',views.story_detail),
-# ]
-
-# class-view
+#############################
+#### function based view ####
+#############################
 urlpatterns = [
-    path('story/', views.StoryList.as_view()),
-    path('story/<int:pk>/', views.StoryDetail.as_view()),
-    path('person/', views.PersonList.as_view()),
-    path('person/<int:pk>/', views.PersonDetail.as_view()),
+    path('story/', views.story_list),
+    path('story/<int:pk>/', views.story_detail),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+
+#############################
+##### class-based view ######
+#############################
+# from rest_framework.urlpatterns import format_suffix_patterns
+# urlpatterns = [
+#     path('story/', views.StoryList.as_view()),
+#     path('story/<int:pk>/', views.StoryDetail.as_view()),
+#     path('person/', views.PersonList.as_view()),
+#     path('person/<int:pk>/', views.PersonDetail.as_view()),
+# ]
+# urlpatterns = format_suffix_patterns(urlpatterns)
