@@ -9,21 +9,36 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from api.models import Story
-from api.serializers import StorySerializer
+from api.models import Story, Person
+from api.serializers import StorySerializer, PersonSerializer
 
 # class-based views
 from rest_framework import generics
 
 
-class StoryList(generics.ListCreateAPIView):
+# ListCreateAPIView
+class StoryList(generics.ListAPIView):
+    queryset = Story.objects.all()
+    serializer_class = StorySerializer
+
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
+
+
+# RetrieveUpdateDestroyAPIView
+class StoryDetail(generics.RetrieveAPIView):
     queryset = Story.objects.all()
     serializer_class = StorySerializer
 
 
-class StoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Story.objects.all()
-    serializer_class = StorySerializer
+class PersonList(generics.ListAPIView):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+
+class PersonDetail(generics.RetrieveAPIView):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
 
 # function based view
 # @api_view(['GET', 'POST'])

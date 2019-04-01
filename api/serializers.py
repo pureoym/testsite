@@ -21,7 +21,7 @@
 from .models import Story, Person
 from rest_framework import serializers
 
-test='https://www.youtube.com/results?search_query=aircraft+carrier&sp=EgIIAQ%253D%253D'
+test = 'https://www.youtube.com/results?search_query=aircraft+carrier&sp=EgIIAQ%253D%253D'
 
 
 # class StorySerializer(serializers.Serializer):
@@ -47,7 +47,29 @@ test='https://www.youtube.com/results?search_query=aircraft+carrier&sp=EgIIAQ%25
 #         instance.save()
 #         return instance
 
+
+class PersonSerializer(serializers.ModelSerializer):
+    # story = serializers.PrimaryKeyRelatedField(many=True, queryset=Story.objects.all())
+
+    class Meta:
+        model = Person
+        fields = ('id', 'name')
+
+
+class PersonRelateField(serializers.RelatedField):
+    def to_representation(self, value):
+        return (value.pid, value.pname)
+
+
 class StorySerializer(serializers.ModelSerializer):
+    # person = serializers.HyperlinkedIdentityField(many=True, view_name='person', read_only=True)
+    person = PersonRelateField(read_only=True)
+
+    # person = serializers.ReadOnlyField(source='person.pid')
+
     class Meta:
         model = Story
-        fields = ('sid','title','content')
+        fields = ('sid', 'title', 'content', 'person')
+        # person = serializers.ReadOnlyField(source='person.id')
+
+# from django.contrib.auth.models import User
