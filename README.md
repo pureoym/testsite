@@ -1,9 +1,9 @@
-## 日志  
+## 说明
 ### 创建项目以及应用
 ```commandline
 python -m django --verion
-django-admin startproject cs_api
-cd cs_api
+django-admin startproject testsite
+cd testsite
 python manage.py startapp api
 ```
 ### 启动系统

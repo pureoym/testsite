@@ -24,56 +24,33 @@ from rest_framework import serializers
 test = 'https://www.youtube.com/results?search_query=aircraft+carrier&sp=EgIIAQ%253D%253D'
 
 
-# class StorySerializer(serializers.Serializer):
-#     sid = serializers.IntegerField(read_only=True)
-#     title = serializers.CharField(required=False, allow_blank=True, max_length=100)
-#
-#     def create(self, validated_data):
-#         """
-#         Create and return a new `Story` instance, given the validated data.
-#         :param validated_data:
-#         :return:
-#         """
-#         return Story.objects.create(**validated_data)
-#
-#     def update(self, instance, validated_data):
-#         """
-#         Update and return an existing `Story` instance, given the validated data.
-#         :param instance:
-#         :param validated_data:
-#         :return:
-#         """
-#         instance.title = validated_data.get('title', instance.title)
-#         instance.save()
-#         return instance
-
-
+#########################
+####### METHOD 1 ########
+#########################
 class PersonSerializer(serializers.ModelSerializer):
-    # story = serializers.PrimaryKeyRelatedField(many=True, queryset=Story.objects.all())
-
     class Meta:
         model = Person
         fields = ('pid', 'pname')
 
 
-# class PersonRelateField(serializers.RelatedField):
-#     def to_representation(self, value):
-#         return (value.pid, value.pname)
-
-
 class StorySerializer(serializers.ModelSerializer):
-
-    # 相关列表中显示model.Person.__str__
+    # 相关列表中显示字符串
+    # 通过调整api.models.Person.__str__来调整内容
     # person = serializers.StringRelatedField(many=True)
 
     # 相关列表中显示主键
-    person = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # person = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     # person = serializers.PrimaryKeyRelatedField(many=True, queryset=Story.objects.all()) # 另一种写法
 
-    # 相关列表中显示全部内容 未成功
-    # person = PersonSerializer()
+    # 相关列表中显示全部内容
+    # 通过调整api.serializers.PersonSerializer.Meta.fields来调整内容
+    person = PersonSerializer(many=True)
 
     class Meta:
         model = Story
         fields = ('sid', 'title', 'content', 'person')
-        # fields = ('sid', 'title', 'content')
+
+#########################
+####### METHOD 2 ########
+#########################
+# https://codereview.stackexchange.com/questions/164616/django-rest-framework-manytomany-relationship-through-intermediate-model
